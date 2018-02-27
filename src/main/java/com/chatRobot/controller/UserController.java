@@ -30,4 +30,16 @@ public class UserController {
         response.getWriter().close();
     }
 
+    @RequestMapping("/add")
+    public void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        long userId = Long.parseLong(request.getParameter("id"));
+
+        User user = this.userService.selectUser(userId);
+        ObjectMapper mapper = new ObjectMapper();
+        response.getWriter().write(mapper.writeValueAsString(user));
+        response.getWriter().close();
+    }
+
 }
